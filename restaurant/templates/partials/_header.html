@@ -1,0 +1,28 @@
+{% load static %}
+<header>
+  <nav class="navbar bg-body-tertiary pb-4 align-items-start">
+    <div class="container-fluid d-flex flex-column">
+      <a class="navbar-brand text-light col-3 text-center mb-2" href="{% url 'home' %}">
+        <img src="{% static 'img/logo_without_name.png' %}" alt="Logo" class="d-inline-block align-text-top">
+        <h1 class="restaurant-name">Little Lemon</h1>
+      </a>
+        <ul class="navbar-nav col-6 d-flex flex-row justify-content-around">
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{% url 'home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{% url 'about' %}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{% url 'menu' %}">Menu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{% url 'book' %}">Book</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{% url 'reservations' %}">Reservations</a>
+          </li>
+        </ul>
+    </div>
+  </nav>
+</header>
