@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <section class="hero-section">
+    <article id="hero" class="col-10 mx-auto rounded-5">
+      <h1 class="heading_shadow">SPECIAL OFFER</h1>
+
+      <p>
+        30% Off This Weekend 
+      </p>
+
+      <a href="{% url 'book' %}" class="cta"> Book now </a>
+    </article>
+  </section>
+
+  <section class="what-waits-section">
+    <h3>What you miss!</h3>
+  </section>
+
+  <section class="popular-dishes">
+    <div class="popular-dishes-img-container">
+      <img src="{% static 'img/grill.jpg' %}">
+      <img src="{% static 'img/salad.jpg' %}">
+      <img src="{% static 'img/head_chef.jpg' %}">
+      <img src="{% static 'img/Grilled fish B.jpg' %}">
+    </div>
+  </section>
+{% endblock %}
