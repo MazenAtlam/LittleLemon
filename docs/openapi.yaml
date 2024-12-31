@@ -1,0 +1,105 @@
+openapi: 3.0.0
+info:
+  title: Files Manager API
+  description: API Docs for Files Manager Project
+  version: 1.0.0
+  contact:
+    email: a.shehab.biomedeng@gmail.com
+    name: Ahmed Shehab
+paths:
+  /status:
+    get:
+      summary: Check system status
+      description: Returns Whether Redis & DB are alive
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+  /stats:
+    get:
+      summary: Get system statistics
+      description: Return the number of users & files in the database
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stats'
+  /users:
+    post:
+      tags:
+        - user
+      summary: Creates a new user in the database
+      description: ''
+      operationId: createUser # Ask
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Bad request (e.g., missing email, missing password, or email already exists)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          
+components:
+  schemas:
+    Status:
+      type: object
+      properties:
+        redis:
+          type: boolean
+          description: Indicates if Redis is operational
+        db:
+          type: boolean
+          description: Indicates if the database is operational
+    Stats:
+      type: object
+      properties:
+        users:
+          type: integer
+          description: Total number of users in the database
+        files:
+          type: integer
+          description: Total number of files in the database
+    UserInput:
+      type: object
+      properties:
+        email:
+          type: string
+          example: example@example.com
+        password:
+          type: string
+          example: '12345'
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The auto-generated user ID
+          example: 'f1e7d35c7ba06511e683b21'
+        email:
+          type: string
+          description: The email of the created user
+          example: example@example.com
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Description of the error
+          example: Missing email or password
