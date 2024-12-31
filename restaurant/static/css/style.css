@@ -1,0 +1,286 @@
+body {
+    font-family: 'Dongle', serif;
+    color: #0e2f10;
+    background-color: #fcf1d5;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Markazi Text', serif;
+    letter-spacing: 2px;
+}
+
+h1 {
+    font-size: 70px;
+    margin-bottom: 0;
+}
+
+h2 {
+    font-size: 50px;
+    margin:1rem 0;
+}
+
+h3 {
+    font-size: 45px;
+    margin:1rem 0;
+}
+
+header .navbar-brand:hover {
+    text-decoration: none;
+}
+
+.restaurant-name {
+    font-family: "Yellowtail", serif;
+    color: white;
+}
+
+p, ul{
+    font-size: 30px;
+}
+
+a {
+    color: #0e2f10;
+    text-decoration: none;
+}
+
+header img {
+    width: 100px;
+}
+
+
+nav {
+    background-image: linear-gradient(to right, #0e2f10, #186d0f, #0e2f10);
+    height: 400px;
+    padding-top: 15px !important;
+}
+
+nav ul {
+    list-style: none;
+    font-size: 40px;
+    text-align: center;
+    padding-inline-start: 0rem;
+    margin-bottom: 0px;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul a {
+    color: #EDEFEE;
+    text-decoration: none;
+}
+
+nav ul a:active {
+    text-decoration: underline;
+}
+
+nav ul a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 0.1rem;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+}
+
+article {
+    flex:1;
+}
+
+.popular-dishes img {
+    width: 200px;
+}
+
+article ul {
+    list-style: none;
+}
+
+main article {
+    border: 1px solid #EDEFEE;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+figure {
+    margin: 0;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+}
+
+input, select{
+    width: 80%;
+    display: block;
+    padding: .5rem 1rem;
+    line-height: 1.5rem;
+    box-sizing: border-box;
+}
+
+#button {
+    padding: .5rem 1rem;
+    border: 1px solid #495E57;
+    background-color:#495E57;;
+    border-radius: 5px;
+    width: 80%;
+    font-size: 35px;
+    display: block;
+    color: #fff;
+    line-height: 25px;
+}
+
+.hero-section {
+    position: relative;
+    height: 400px;
+}
+
+#hero {
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)), url('../img/restaurant_inside.jpg');
+    background-size: cover;
+    background-position: 75%;
+    color: white;
+    min-height: 200px;
+    text-align: center;;
+    border: none;
+    padding-block: 85px;
+    position: absolute;
+    top: -22%;
+    right: calc((100% - 1406.67px) / 2);
+}
+
+#hero p {
+    font-size: 45px;
+    margin:0;
+    text-shadow: 2px 2px 4px #333333;
+}
+
+.what-waits-section {
+    background-color: #186d0f;
+    padding-block: 20px;
+    height: 300px;
+}
+
+.what-waits-section h3 {
+    color: #fcf1d5;
+    position: relative;
+    margin-inline: auto;
+    font-size: 42px;
+}
+
+.what-waits-section h3::after {
+    position: absolute;
+    content: "";
+    background-color: #fcf1d5;
+    width: 120px;
+    height: 2px;
+    top: 57px;
+    right: calc((100% - 120px) / 2)
+}
+
+.cta { 
+    display: inline-block; 
+    color: rgba(255, 255, 255, 0.9);
+    width: 200px; 
+    font-weight: bold; 
+    font-size: 40px;
+    padding: 8px; 
+    border: 3px solid #fff; 
+    text-align: center; 
+    outline: none; 
+    text-decoration: none; 
+    margin: 1rem;
+    transition: all 0.3s ease;
+} 
+
+.cta:hover {
+    color:#fff;
+    background:#0e2f10;
+    border: 3px solid #0e2f10;
+}
+
+.heading-shadow {
+    text-shadow: 1px 1px 4px #333333;
+}
+
+footer {
+    color: #0e2f10;
+    padding: 1rem;
+    display: flex;
+    gap: 2rem 1rem;
+}
+
+footer img {
+    max-width: 50%;
+}
+
+footer p {
+    border-top: #333333;
+    border-style: solid;
+    border-width: 0.1rem;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    padding-top: 1rem;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding-bottom: 1rem;
+}
+
+.column {
+    flex-basis: 50%;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+
+.column figure {
+    padding: 0px 12px;
+
+}
+
+
+.videowrap {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 1rem;
+	height: 0;
+}
+
+.videowrap iframe {
+	position: absolute;
+    margin-top: 2rem;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.menu-price{
+    display: block;
+    font-size: 30px;
+}
+
+@media (max-width: 800px) {
+    section {
+        flex-direction: column;   
+    }
+
+    .row {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    input{
+        width: 100%;
+    }
+
+    #button{
+        width: 100%;
+    }
+}
