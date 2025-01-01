@@ -38,7 +38,11 @@ header .navbar-brand:hover {
     color: white;
 }
 
-p, ul{
+.paragraph p {
+    font-size: 25px;
+}
+
+p {
     font-size: 25px;
 }
 
@@ -93,11 +97,21 @@ section {
 }
 
 .about-section {
-    display: flex;
-    gap: 2rem 1rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    flex-direction: row;
+    position: relative;
+    width: 85%;
+    margin-inline: auto;
+    margin-block: 20px;
+    border: 1px solid #495E57;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.about-section h1 {
+    background-color: #fcf1d5;
+    position: absolute;
+    top: -17.25%;
+    right: calc((100% - 228.2px) / 2);
+    padding-bottom: 14px;
 }
 
 article {
@@ -219,7 +233,7 @@ input, select{
     border: none;
     padding-block: 85px;
     position: absolute;
-    top: 25%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -303,17 +317,17 @@ footer p {
 .row_about {
     display: flex;
     flex-direction: row;
-    width: 100%;
 }
 
-.column {
-    flex-basis: 50%;
-}
-
-.column figure {
+.column figure img {
     padding: 0px 12px;
+    width: 600px;
 }
 
+figcaption {
+    font-size: 20px !important;
+    text-align: center;
+}
 
 .videowrap {
 	position: relative;
@@ -343,7 +357,6 @@ footer p {
 
     .row_about {
         flex-direction: column;
-        width: 100%;
     }
 
     input{
