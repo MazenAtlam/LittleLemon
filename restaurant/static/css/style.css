@@ -38,7 +38,11 @@ header .navbar-brand:hover {
     color: white;
 }
 
-p, ul{
+.paragraph p {
+    font-size: 25px;
+}
+
+p {
     font-size: 25px;
 }
 
@@ -57,8 +61,9 @@ header {
 
 nav {
     background-image: linear-gradient(to right, #0e2f10, #186d0f, #0e2f10);
-    height: 400px;
+    height: 315px;
     padding-top: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 nav ul {
@@ -67,10 +72,13 @@ nav ul {
     text-align: center;
     padding-inline-start: 0rem;
     margin-bottom: 0px;
+    width: 100%;
+    max-width: 700px;
 }
 
 nav ul li {
     display: inline-block;
+    padding-inline: 5px;
 }
 
 nav ul a {
@@ -93,11 +101,24 @@ section {
 }
 
 .about-section {
-    display: flex;
-    gap: 2rem 1rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    flex-direction: row;
+    width: 85%;
+    margin-inline: auto;
+    margin-block: 20px;
+    border: 1px solid #495E57;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.body-header {
+    height: 85px;
+}
+
+.body-header h1 {
+    background-color: #fcf1d5;
+    width: fit-content;
+    padding-bottom: 1px;
+    padding-inline: 10px;
+    border-radius: 5px;
 }
 
 article {
@@ -219,7 +240,7 @@ input, select{
     border: none;
     padding-block: 85px;
     position: absolute;
-    top: 25%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -303,17 +324,17 @@ footer p {
 .row_about {
     display: flex;
     flex-direction: row;
-    width: 100%;
 }
 
-.column {
-    flex-basis: 50%;
-}
-
-.column figure {
+.column figure img {
     padding: 0px 12px;
+    width: 600px;
 }
 
+figcaption {
+    font-size: 20px !important;
+    text-align: center;
+}
 
 .videowrap {
 	position: relative;
@@ -343,7 +364,6 @@ footer p {
 
     .row_about {
         flex-direction: column;
-        width: 100%;
     }
 
     input{
