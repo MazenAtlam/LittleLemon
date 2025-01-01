@@ -61,8 +61,9 @@ header {
 
 nav {
     background-image: linear-gradient(to right, #0e2f10, #186d0f, #0e2f10);
-    height: 400px;
+    height: 315px;
     padding-top: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 nav ul {
@@ -71,10 +72,13 @@ nav ul {
     text-align: center;
     padding-inline-start: 0rem;
     margin-bottom: 0px;
+    width: 100%;
+    max-width: 700px;
 }
 
 nav ul li {
     display: inline-block;
+    padding-inline: 5px;
 }
 
 nav ul a {
@@ -97,7 +101,6 @@ section {
 }
 
 .about-section {
-    position: relative;
     width: 85%;
     margin-inline: auto;
     margin-block: 20px;
@@ -106,12 +109,16 @@ section {
     border-radius: 10px;
 }
 
-.about-section h1 {
+.body-header {
+    height: 85px;
+}
+
+.body-header h1 {
     background-color: #fcf1d5;
-    position: absolute;
-    top: -17.25%;
-    right: calc((100% - 228.2px) / 2);
-    padding-bottom: 14px;
+    width: fit-content;
+    padding-bottom: 1px;
+    padding-inline: 10px;
+    border-radius: 5px;
 }
 
 article {
