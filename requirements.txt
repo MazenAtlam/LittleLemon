@@ -1,0 +1,10 @@
+# Django framework
+Django>=4.2,<5.0
+
+# Linter and Code Formatting
+pylint>=2.17,<3.0
+black>=23.0,<24.0
+
+# Other Django utilities (Optional)
+django-environ>=0.10,<1.0  # For managing environment variables in production
+djangorestframework>=3.14,<4.0  # For building APIs
