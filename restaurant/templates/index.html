@@ -5,11 +5,9 @@
   <section class="hero-section">
     <article id="hero" class="col-10 mx-auto rounded-5">
       <h1 class="heading_shadow">SPECIAL OFFER</h1>
-
       <p>
         30% Off This Weekend 
       </p>
-
       <a href="{% url 'book' %}" class="cta"> Book now </a>
     </article>
   </section>
@@ -18,12 +16,34 @@
     <h3>What you miss!</h3>
   </section>
 
-  <section class="popular-dishes">
-    <div class="popular-dishes-img-container">
-      <img src="{% static 'img/grill.jpg' %}">
+  <div class="container popular-dishes">
+    <div class="img-container row justify-content-md-center">
       <img src="{% static 'img/salad.jpg' %}">
-      <img src="{% static 'img/head_chef.jpg' %}">
+      <img src="{% static 'img/grill B.jpg' %}">
+      <img src="{% static 'img/pasta.jpg' %}">
+      <img src="{% static 'img/lemon dessert B.jpg' %}">
       <img src="{% static 'img/Grilled fish B.jpg' %}">
     </div>
-  </section>
+  </div>
+
+  <div class="popular-dishes-text d-flex align-items-strat justify-content-center">
+    <div class="paragraph">
+      <h3>Menu</h3>
+      <p>Our menu consists of 12-15 seasonal items based on Italian, Greek, and Turkish culture.</p>
+    </div>
+
+    <div class="paragraph">
+      <h3>Reserve a table</h3>
+      <p>Reserve your table for an Italian, Greek, and Turkish dining experience.</p>
+    </div>
+
+    <div class="paragraph">
+      <h3>Availability</h3>
+      <p>The Little Lemon Restaurant is open 7 days a week, except for public holidays.</p>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-center justify-content-center">
+    <a href="{% url 'book' %}" class="book-now-button"> Book now </a>
+  </div>
 {% endblock %}

@@ -2,12 +2,12 @@ body {
     font-family: 'Dongle', serif;
     color: #0e2f10;
     background-color: #fcf1d5;
+    font-size: 40px;
+    letter-spacing: 2px;
 }
-
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Markazi Text', serif;
-    letter-spacing: 2px;
 }
 
 h1 {
@@ -25,6 +25,10 @@ h3 {
     margin:1rem 0;
 }
 
+article h1 {
+    text-align: center;
+}
+
 header .navbar-brand:hover {
     text-decoration: none;
 }
@@ -35,7 +39,7 @@ header .navbar-brand:hover {
 }
 
 p, ul{
-    font-size: 30px;
+    font-size: 25px;
 }
 
 a {
@@ -47,11 +51,14 @@ header img {
     width: 100px;
 }
 
+header {
+    background-image: linear-gradient(to right, #0e2f10, #186d0f, #0e2f10);
+}
 
 nav {
     background-image: linear-gradient(to right, #0e2f10, #186d0f, #0e2f10);
     height: 400px;
-    padding-top: 15px !important;
+    padding-top: 0 !important;
 }
 
 nav ul {
@@ -85,12 +92,68 @@ section {
     flex-direction: column;
 }
 
+.about-section {
+    display: flex;
+    gap: 2rem 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    flex-direction: row;
+}
+
 article {
     flex:1;
 }
 
+article img {
+    max-width: 100%;
+}
+
+.book-now-button {
+    background-color: #d3ad63;
+    font-size: 45px;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    box-shadow: 2px 4px 2px #0e2f10;
+    transition: background-color 0.15s ease;
+    transition: box-shadow 0.3s ease;
+}
+
+.book-now-button:hover {
+    background-color: #9f844d;
+    box-shadow: none;
+}
+
+.popular-dishes {
+    position: relative;
+    margin-right: 0;
+    margin-left: 0;
+    max-width: 100%;
+    height: 100px;
+}
+
+.popular-dishes .img-container {
+    position: absolute;
+    top: -100%;
+    right: calc((100% - (250px * 5)) / 2);
+}
+
 .popular-dishes img {
-    width: 200px;
+    width: 250px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.popular-dishes-text .paragraph {
+    width: 300px;
+    margin-left: calc(((250px * 5) - (300px * 3)) / 4);
+    margin-right: calc(((250px * 5) - (300px * 3)) / 4);
 }
 
 article ul {
@@ -120,10 +183,18 @@ input, select{
     box-sizing: border-box;
 }
 
+.social_media_header {
+    margin-left: 70px;
+}
+
+.social_media_header a svg {
+    color: #f9d219;
+}
+
 #button {
     padding: .5rem 1rem;
     border: 1px solid #495E57;
-    background-color:#495E57;;
+    background-color:#495E57;
     border-radius: 5px;
     width: 80%;
     font-size: 35px;
@@ -134,6 +205,7 @@ input, select{
 
 .hero-section {
     position: relative;
+    width: 100%;
     height: 400px;
 }
 
@@ -147,8 +219,9 @@ input, select{
     border: none;
     padding-block: 85px;
     position: absolute;
-    top: -22%;
-    right: calc((100% - 1406.67px) / 2);
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #hero p {
@@ -158,13 +231,13 @@ input, select{
 }
 
 .what-waits-section {
-    background-color: #186d0f;
+    background-color: #d3ad63;
     padding-block: 20px;
-    height: 300px;
+    height: 230px;
 }
 
 .what-waits-section h3 {
-    color: #fcf1d5;
+    color: #fcf6e7;
     position: relative;
     margin-inline: auto;
     font-size: 42px;
@@ -182,21 +255,22 @@ input, select{
 
 .cta { 
     display: inline-block; 
-    color: rgba(255, 255, 255, 0.9);
+    color: #fff;
     width: 200px; 
     font-weight: bold; 
     font-size: 40px;
     padding: 8px; 
     border: 3px solid #fff; 
+    border-radius: 10px;
     text-align: center; 
     outline: none; 
     text-decoration: none; 
     margin: 1rem;
-    transition: all 0.3s ease;
+    transition: backgroung-color 0.3s ease;
+    transition: border 0.2s ease;
 } 
 
 .cta:hover {
-    color:#fff;
     background:#0e2f10;
     border: 3px solid #0e2f10;
 }
@@ -226,22 +300,18 @@ footer p {
     padding-top: 1rem;
 }
 
-.row {
+.row_about {
     display: flex;
     flex-direction: row;
     width: 100%;
-    padding-bottom: 1rem;
 }
 
 .column {
     flex-basis: 50%;
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
 }
 
 .column figure {
     padding: 0px 12px;
-
 }
 
 
@@ -271,7 +341,7 @@ footer p {
         flex-direction: column;   
     }
 
-    .row {
+    .row_about {
         flex-direction: column;
         width: 100%;
     }
