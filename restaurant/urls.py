@@ -10,7 +10,7 @@ Available URL patterns:
 - 'book/' : Booking page
 - 'reservations/' : Reservations page
 - 'menu/' : Menu page
-- 'menu_item/<int:pk>/' : Display specific menu item by primary key
+- 'menu_item/<int:primary_key>/' : Display specific menu item by primary key
 - 'bookings' : Bookings page
 
 Each URL pattern is associated with a view function and a name for easy reference.
@@ -26,6 +26,6 @@ urlpatterns = [
     path('book/', views.book, name="book"),
     path('reservations/', views.reservations, name="reservations"),
     path('menu/', views.menu, name="menu"),
-    path('menu_item/<int:pk>/', views.display_menu_item, name="menu_item"),
+    path('menu_item/<int:primary_key>/', views.display_menu_item, name="menu_item"),
     path('bookings', views.bookings, name='bookings'),
 ]
