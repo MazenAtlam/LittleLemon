@@ -48,12 +48,16 @@
 
   <body>
     <!--Header content-->
-    {% include 'partials/_header.html' %}
+    <header>
+      {% include 'partials/_header.html' %}
+      {% block body_header %} {% endblock %}
+    </header>
 
     <main>{% block content %} {% endblock %}</main>
 
     <!--Footer content-->
-    {% include 'partials/_footer.html' %} 
-    <!-- Replace this comment with your code  -->
+    <footer>
+      {% include 'partials/_footer.html' %} 
+    </footer>
   </body>
 </html>
