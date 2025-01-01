@@ -121,6 +121,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 # The settings for static files have been updated for the Graded assessment
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 STATIC_URL = "static/"
 
 # Default primary key field type
