@@ -1,6 +1,7 @@
+---
 name: Django CI (SQLite3)
 
-on:
+'on':
   pull_request:
     branches:
       - main
@@ -11,38 +12,38 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Check Out Code
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      # Step 1: Check Out Code
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    # Step 2: Set Up Python
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: "3.*"
+      # Step 2: Set Up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
 
-    # Step 3: Install Dependencies
-    - name: Install dependencies
-      run: |
-        python3 -m pip install --upgrade pip
-        pip install -r requirements.txt
+      # Step 3: Install Dependencies
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-    # Step 4: Run Migrations
-    - name: Run migrations
-      run: python3 manage.py migrate
+      # Step 4: Run Migrations
+      - name: Run migrations
+        run: python3 manage.py migrate
 
-    # Step 5: Run Tests
-    - name: Run tests
-      run: python3 manage.py test
+      # Step 5: Run Tests
+      - name: Run tests
+        run: python3 manage.py test
 
-    # Step 6: Run Linter
-    - name: Run linter
-      run: pylint restaurant/
+      # Step 6: Run Linter
+      - name: Run linter
+        run: pylint restaurant/
 
-    # Step 7: Check Code Formatting
-    - name: Check code formatting
-      run: black --check .
+      # Step 7: Check Code Formatting
+      - name: Check code formatting
+        run: black --check .
 
-    # Step 8: Static Files Collection
-    - name: Collect static files
-      run: python3 manage.py collectstatic --noinput
+      # Step 8: Static Files Collection
+      - name: Collect static files
+        run: python3 manage.py collectstatic --noinput
