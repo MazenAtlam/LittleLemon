@@ -14,5 +14,5 @@ class RestaurantConfig(AppConfig):
     'BigAutoField' and specifies the name of the application as 'restaurant'.
     """
 
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'restaurant'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "restaurant"
