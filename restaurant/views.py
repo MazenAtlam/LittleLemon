@@ -10,10 +10,11 @@ import json
 from django.shortcuts import render
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse
-from .forms import BookingForm
-from .models import Menu
-from .models import Booking
+from django.http import HttpResponse, JsonResponse
+from django.utils.dateparse import parse_datetime, parse_date
+from django.utils.timezone import make_aware
+from restaurant.forms import BookingForm
+from restaurant.models import Menu, Booking
 
 
 # pylint: disable=E1101
@@ -62,8 +63,6 @@ def reservations(request):
         HttpResponse: The rendered 'bookings.html' template with the bookings data
                       in JSON format.
     """
-
-    # date = request.GET.get('date', datetime.today().date())
     booking_objects = Booking.objects.all()
     booking_json = serializers.serialize("json", booking_objects)
     return render(request, "bookings.html", {"bookings": booking_json})
@@ -154,25 +153,31 @@ def bookings(request):
     """
 
     if request.method == "POST":
-        data = json.load(request)
-        exist = (
-            Booking.objects.filter(reservation_date=data["reservation_date"])
-            .filter(reservation_slot=data["reservation_slot"])
-            .exists()
-        )
-        if not exist:
+        data = json.loads(request.body.decode("utf-8"))
+        reservation_date = parse_datetime(data["reservation_date"])
+        if reservation_date is None:
+            return JsonResponse({"error": "Invalid date format"}, status=400)
+        if reservation_date.tzinfo is None:
+            reservation_date = make_aware(reservation_date)
+        exist = Booking.objects.filter(
+            reservation_date=data["reservation_date"]
+        ).exists()
+        if exist is False:
             booking = Booking(
                 first_name=data["first_name"],
-                reservation_date=data["reservation_date"],
+                reservation_date=reservation_date,
                 reservation_slot=data["reservation_slot"],
             )
             booking.save()
         else:
-            return HttpResponse("{'error':1}", content_type="application/json")
+            return JsonResponse(
+                {"error": "Booking already exists for this date"}, status=400
+            )
 
-    date = request.GET.get("date", datetime.today().date())
+    date_str = request.GET.get("date", datetime.today().date().isoformat())
+    date = parse_date(date_str)
 
-    today_bookings = Booking.objects.all().filter(reservation_date=date)
-    booking_json = serializers.serialize("json", today_bookings)
+    bookings_by_date = Booking.objects.all().filter(reservation_date__date=date)
+    booking_json = serializers.serialize("json", bookings_by_date)
 
     return HttpResponse(booking_json, content_type="application/json")
