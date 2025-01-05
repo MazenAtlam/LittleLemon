@@ -63,6 +63,7 @@ def reservations(request):
         HttpResponse: The rendered 'bookings.html' template with the bookings data
                       in JSON format.
     """
+
     booking_objects = Booking.objects.all()
     booking_json = serializers.serialize("json", booking_objects)
     return render(request, "bookings.html", {"bookings": booking_json})
