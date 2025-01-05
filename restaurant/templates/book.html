@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section>
+  <article>
+    <h1>Make a reservation</h1>
+    <!--Begin row-->
+    <div class="row">
+      <!--Begin col-->
+      <div class="column">
+          {% csrf_token %}
+          <form method="POST" id="form">
+            <!-- {% csrf_token %} -->
+            <p>
+              <label for="first_name">Name:</label>
+              <input type="text" placeholder="Your Name" maxlength="200" required id="first_name">
+            </p>
+            <p>
+            <!-- Step 9: Part one -->
+            <label for="reservation_date">Reservation Date:</label>
+            <input type="date" required id="reservation_date">
+            </p>
+            <p>
+              <label for="reservation_slot">Reservation Slot:</label>
+              <input type="number" min="2" max="20" required id="reservation_slot">
+            </p>
+            <p>
+              <label for="reservation_time">Reservation time:</label>
+              <select id="reservation_time" required>
+              </select>
+            </p>
+            <button type="submit" id="button">Reserve</button>
+          </form>
+      </div>
+      <!--End col-->
+
+      <!--Begin col-->
+      <div class="column">
+        <h2>Bookings For <span id="today"></span></h2>
+        <div id="bookings">
+        </div>
+      </div>
+      <!--End col-->
+    </div>
+    <!--End row-->
+
+
+
+
+  </article>
+</section>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const notyf = new Notyf();
+  const dateInput = document.getElementById('reservation_date');
+  const timeSelect = document.getElementById('reservation_time');
+  const form = document.getElementById('form');
+  const today = new Date().toISOString().split('T')[0];
+  dateInput.setAttribute('min', today);
+
+  function populateTimeOptions() {
+    const selectedDate = dateInput.value ? new Date(dateInput.value) : new Date();
+    const currentDate = new Date();
+    const reserved_slots = [];
+    let bookings = '';
+    document.getElementById('today').textContent = selectedDate.toDateString();
+    timeSelect.innerHTML = '';
+
+    let startHour = 10;
+    if (selectedDate.toDateString() === currentDate.toDateString()) {
+      if (currentDate.getHours() >= startHour && currentDate.getHours() < 22) {
+        startHour = currentDate.getHours() + 1;
+      } else if (currentDate.getHours() >= 22) {
+        startHour = 23;
+      }
+    }
+
+    const getReservedSlots = async () => {
+        try {
+          const response = await fetch("{% url 'bookings' %}?date=" + selectedDate.toISOString().split('T')[0]);
+          if (!response.ok) {
+            notyf.error('Failed to fetch bookings');
+            return [];
+          }
+          return await response.json();
+        }
+        catch (err) {
+          notyf.error('Failed to fetch bookings');
+          return [];
+        }
+    };
+
+    getReservedSlots().then(data => {
+      for (const booking of data) {
+        const time = new Date(booking.fields.reservation_date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        bookings += `<p>${booking.fields.first_name} - ${time}</p>`;
+        reserved_slots.push(time.split(':')[0]);
+      }
+      
+      if (bookings === '') {
+        bookings = '<p>No bookings for this date</p>';
+      }
+      
+      document.getElementById('bookings').innerHTML = bookings;
+
+      let slot_options = '<option value="0" disabled>Select time</option>'
+      for (let hour = startHour; hour < 23; hour++) {
+        const label = formatTime(hour);
+        if (!reserved_slots.includes(label.split(':')[0].padStart(2, '0'))) {
+          slot_options += `<option value="${hour}">${label}</option>`;
+        } else {
+          slot_options += `<option value="${hour}" disabled>${label} - Reserved</option>`;
+        }
+      }
+
+      document.getElementById('reservation_time').innerHTML = slot_options;
+    
+    });
+
+  }
+
+  function formatTime(hour) {
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const formattedHour = hour % 12 || 12;
+    return `${formattedHour}:00 ${ampm}`;
+  }
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const first_name = document.getElementById('first_name').value;
+    const reservation_date = document.getElementById('reservation_date').value;
+    const reservation_slot = document.getElementById('reservation_slot').value;
+    const reservation_time = document.getElementById('reservation_time').value;
+    
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const response = await fetch("{% url 'bookings' %}", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+      },
+      body: JSON.stringify({
+        first_name,
+        reservation_date: new Date(`${reservation_date}T${reservation_time.padStart(2, '0')}:00:00`).toISOString(),
+        reservation_slot,
+      }),
+    });
+
+    if (response.ok) {
+      populateTimeOptions();
+      notyf.success('Reservation made successfully');
+    } else {
+      notyf.error('Failed to make reservation');
+    }
+  });
+
+  dateInput.addEventListener('change', populateTimeOptions);
+  populateTimeOptions();
+})
+</script>
+{% endblock %}
+
