@@ -21,8 +21,8 @@ class Booking(models.Model):
     """
 
     first_name = models.CharField(max_length=200)
-    reservation_date = models.DateField()
-    reservation_slot = models.SmallIntegerField(default=10)
+    reservation_date = models.DateTimeField()
+    reservation_slot = models.SmallIntegerField()
 
     def __str__(self):
         """
