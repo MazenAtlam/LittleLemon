@@ -14,7 +14,7 @@ from django.http import HttpResponse, JsonResponse
 from django.utils.dateparse import parse_datetime, parse_date
 from django.utils.timezone import make_aware
 from restaurant.forms import BookingForm
-from restaurant.models import Menu, Booking
+from restaurant.models import Menu, Booking, Category
 
 
 # pylint: disable=E1101
@@ -111,9 +111,8 @@ def menu(request):
         HttpResponse: The rendered 'menu.html' template with the menu data.
     """
 
-    menu_data = Menu.objects.all()
-    main_data = {"menu": menu_data}
-    return render(request, "menu.html", {"menu": main_data})
+    categories = Category.objects.all()
+    return render(request, "menu.html", {"categories": categories})
 
 
 def display_menu_item(request, primary_key=None):
@@ -127,7 +126,7 @@ def display_menu_item(request, primary_key=None):
     """
 
     if primary_key:
-        menu_item = Menu.objects.get(primary_key=primary_key)
+        menu_item = Menu.objects.get(pk=primary_key)
     else:
         menu_item = ""
     return render(request, "menu_item.html", {"menu_item": menu_item})
