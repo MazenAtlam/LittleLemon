@@ -16,6 +16,7 @@ from django.utils.timezone import make_aware
 from restaurant.forms import BookingForm
 from restaurant.models import Menu, Booking
 
+
 # pylint: disable=E1101
 def home(request):
     """
