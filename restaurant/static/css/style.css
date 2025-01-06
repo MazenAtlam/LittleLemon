@@ -59,14 +59,18 @@ header {
     background-image: linear-gradient(to right, #0e2f10, #186d0f, #0e2f10);
 }
 
-nav {
+header nav {
     background-image: linear-gradient(to right, #0e2f10, #186d0f, #0e2f10);
     height: 315px;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
 }
 
-nav ul {
+.path-breadcrumb {
+    margin-left: 30px;
+}
+
+header nav ul {
     list-style: none;
     font-size: 40px;
     text-align: center;
@@ -76,21 +80,21 @@ nav ul {
     max-width: 700px;
 }
 
-nav ul li {
+header nav ul li {
     display: inline-block;
     padding-inline: 5px;
 }
 
-nav ul a {
+header nav ul a {
     color: #EDEFEE;
     text-decoration: none;
 }
 
-nav ul a:active {
+header nav ul a:active {
     text-decoration: underline;
 }
 
-nav ul a:hover {
+header nav ul a:hover {
     text-decoration: underline;
     text-decoration-thickness: 0.1rem;
 }
@@ -98,6 +102,23 @@ nav ul a:hover {
 section {
     display: flex;
     flex-direction: column;
+}
+
+.menu {
+    margin-inline: 30px;
+}
+
+.category ul {
+    border: 1px solid #0e2f10;
+}
+
+.category ul li {
+    padding: 10px;
+    width: 20%;
+}
+
+.category ul li a img {
+    width: 100%;
 }
 
 .about-section {
@@ -149,32 +170,6 @@ article img {
 .book-now-button:hover {
     background-color: #9f844d;
     box-shadow: none;
-}
-
-.popular-dishes {
-    position: relative;
-    margin-right: 0;
-    margin-left: 0;
-    max-width: 100%;
-    height: 100px;
-}
-
-.popular-dishes .img-container {
-    position: absolute;
-    top: -100%;
-    right: calc((100% - (250px * 5)) / 2);
-}
-
-.popular-dishes img {
-    width: 250px;
-    padding-left: 0;
-    padding-right: 0;
-}
-
-.popular-dishes-text .paragraph {
-    width: 300px;
-    margin-left: calc(((250px * 5) - (300px * 3)) / 4);
-    margin-right: calc(((250px * 5) - (300px * 3)) / 4);
 }
 
 article ul {
@@ -251,20 +246,25 @@ input, select{
     text-shadow: 2px 2px 4px #333333;
 }
 
-.what-waits-section {
+.popular-dishes {
     background-color: #d3ad63;
     padding-block: 20px;
+    margin-bottom: 75px;
+    margin-right: 0;
+    margin-left: 0;
+    max-width: 100%;
     height: 230px;
+    position: relative;
 }
 
-.what-waits-section h3 {
+.popular-dishes h3 {
     color: #fcf6e7;
     position: relative;
     margin-inline: auto;
     font-size: 42px;
 }
 
-.what-waits-section h3::after {
+.popular-dishes h3::after {
     position: absolute;
     content: "";
     background-color: #fcf1d5;
@@ -272,6 +272,24 @@ input, select{
     height: 2px;
     top: 57px;
     right: calc((100% - 120px) / 2)
+}
+
+.popular-dishes .img-container {
+    position: absolute;
+    bottom: -70px;
+    right: calc((100% - (250px * 5)) / 2);
+}
+
+.popular-dishes img {
+    width: 250px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.popular-dishes-text .paragraph {
+    width: 300px;
+    margin-left: calc(((250px * 5) - (300px * 3)) / 4);
+    margin-right: calc(((250px * 5) - (300px * 3)) / 4);
 }
 
 .cta { 
@@ -321,12 +339,7 @@ footer p {
     padding-top: 1rem;
 }
 
-.row_about {
-    display: flex;
-    flex-direction: row;
-}
-
-.column figure img {
+.about-section figure img {
     padding: 0px 12px;
     width: 600px;
 }
@@ -353,17 +366,29 @@ figcaption {
 }
 
 .menu-price{
-    display: block;
     font-size: 30px;
+}
+
+.menu-item-content {
+    width: 80%;
+}
+
+.menu-item-price {
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+.menu-item-content img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 4px 4px 2px #0e2f10;
+    padding-inline: 0;
+    object-fit: cover;
 }
 
 @media (max-width: 800px) {
     section {
         flex-direction: column;   
-    }
-
-    .row_about {
-        flex-direction: column;
     }
 
     input{

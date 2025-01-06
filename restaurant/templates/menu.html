@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body_header %}
+  <section class="body-header d-flex align-items-center justify-content-center">
+    <h1>Menu</h1>
+  </section>
+{% endblock %}
+
+{% block content %}
+  <section>
+    <nav class="path-breadcrumb" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Menu</li>
+      </ol>
+    </nav>
+    
+    <!--Begin col-->
+    <div class="menu column">
+      {% for category in categories %}
+        <div class="container category">
+          <h2>{{ category.name }}</h2>
+
+          <ul class="navbar-nav d-flex flex-row justify-content-start row row-cols-5">
+            {% for menu_item in category.menu_items.all %}
+              <li class="nav-item d-flex flex-column justify-content-start">
+                <a href="{% url 'menu_item' primary_key=menu_item.pk %}" class="nav-link text-center">
+                  <img src="{% static 'img/menu_item/' %}{{ menu_item.name }}.jpg" alt="{{ menu_item.name }}"/>
+                </a>
+                <p>{{ menu_item.name }}</p>
+                <span class="menu-price">
+                  ${{ menu_item.price }}.00
+                </span>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+<!--End col-->
+{% endblock %}
