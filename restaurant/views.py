@@ -46,27 +46,27 @@ def about(request):
     return render(request, "about.html")
 
 
-def reservations(request):
-    """
-    Handles the reservations view for the restaurant.
+# def reservations(request):
+#     """
+#     Handles the reservations view for the restaurant.
 
-    This function retrieves the date from the GET request parameters or defaults
-    to the current date if not provided. It then fetches all booking records from
-    the database, serializes them into JSON format, and renders the 'bookings.html'
-    template with the serialized bookings data.
+#     This function retrieves the date from the GET request parameters or defaults
+#     to the current date if not provided. It then fetches all booking records from
+#     the database, serializes them into JSON format, and renders the 'bookings.html'
+#     template with the serialized bookings data.
 
-    Args:
-        request (HttpRequest): The HTTP request object containing metadata about
-                               the request.
+#     Args:
+#         request (HttpRequest): The HTTP request object containing metadata about
+#                                the request.
 
-    Returns:
-        HttpResponse: The rendered 'bookings.html' template with the bookings data
-                      in JSON format.
-    """
+#     Returns:
+#         HttpResponse: The rendered 'bookings.html' template with the bookings data
+#                       in JSON format.
+#     """
 
-    booking_objects = Booking.objects.all()
-    booking_json = serializers.serialize("json", booking_objects)
-    return render(request, "bookings.html", {"bookings": booking_json})
+#     booking_objects = Booking.objects.all()
+#     booking_json = serializers.serialize("json", booking_objects)
+#     return render(request, "bookings.html", {"bookings": booking_json})
 
 
 def book(request):
@@ -164,7 +164,7 @@ def bookings(request):
         ).exists()
         if exist is False:
             booking = Booking(
-                first_name=data["first_name"],
+                name=data["name"],
                 reservation_date=reservation_date,
                 reservation_slot=data["reservation_slot"],
             )
