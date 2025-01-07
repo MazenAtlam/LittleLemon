@@ -26,7 +26,7 @@
             {% for menu_item in category.menu_items.all %}
               <li class="nav-item d-flex flex-column justify-content-start">
                 <a href="{% url 'menu_item' primary_key=menu_item.pk %}" class="nav-link text-center">
-                  <img src="{% static 'img/menu_item/' %}{{ menu_item.name }}.jpg" alt="{{ menu_item.name }}"/>
+                  <img src="{% static 'img/menu_items/' %}{{ menu_item.name }}.jpg" alt="{{ menu_item.name }}"/>
                 </a>
                 <p>{{ menu_item.name }}</p>
                 <span class="menu-price">

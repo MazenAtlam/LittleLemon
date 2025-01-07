@@ -27,7 +27,7 @@
         <h1 class="restaurant-name">Little Lemon</h1>
       </a>
 
-      <ul class="navbar-nav d-flex flex-row justify-content-around">
+      <ul id="page-navbar" class="navbar-nav d-flex flex-row justify-content-around">
         <li class="nav-item">
           <a class="nav-link text-light" href="{% url 'home' %}">Home</a>
         </li>
@@ -42,10 +42,6 @@
 
         <li class="nav-item">
           <a class="nav-link text-light" href="{% url 'book' %}">Book</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link text-light" href="{% url 'reservations' %}">Reservations</a>
         </li>
       </ul>
     </div>
