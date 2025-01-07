@@ -10,17 +10,17 @@ class Booking(models.Model):
     Booking model represents a reservation made by a customer.
 
     Attributes:
-        first_name (CharField): The first name of the customer making the reservation.
+        name (CharField): The name of the customer making the reservation.
             Maximum length is 200 characters.
         reservation_date (DateField): The date of the reservation.
         reservation_slot (SmallIntegerField): The time slot for the reservation.
             Default value is 10.
 
     Methods:
-        __str__(): Returns the first name of the customer.
+        __str__(): Returns the name of the customer.
     """
 
-    first_name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
     reservation_date = models.DateTimeField()
     reservation_slot = models.SmallIntegerField()
 
@@ -32,7 +32,7 @@ class Booking(models.Model):
             str: The first name of the object.
         """
 
-        return str(self.first_name)
+        return str(self.name)
 
 
 class Menu(models.Model):
