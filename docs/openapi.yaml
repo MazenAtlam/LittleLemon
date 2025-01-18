@@ -10,7 +10,7 @@ info:
     x-github: https://github.com/AhmedShehab1
   
 servers:
-  - url: http://127.0.0.1:8000
+  - url: http://localhost:8000/
     description: Local Development Server
 paths:
   /api/groups/manager/users:
@@ -97,6 +97,7 @@ paths:
                           example: adrian@littlelemon.com
       security:
         - TokenAuth: []
+
 
   /api/menu-items:
     post:
@@ -249,7 +250,8 @@ paths:
 
     
       security:
-        - TokenAuth: []
+       - TokenAuth: []
+
 
   /api/categories:
     post:
@@ -296,6 +298,10 @@ paths:
                         slug:
                           type: string
                           example: Main
+                          
+        
+      security: 
+        - TokenAuth: []
     get:
       summary: Browse all categories
       tags:
@@ -330,6 +336,8 @@ paths:
                           type: string
       security:
         - TokenAuth: []
+
+        
   /api/menu-items/{id}:
     patch:
       summary: Update a menu item
@@ -417,6 +425,10 @@ paths:
                 properties:
                   detail:
                     type: string
+                    
+      security: 
+          - TokenAuth: []
+        
     get:
       summary: List delivery crew members
       tags:
@@ -449,6 +461,10 @@ paths:
                           type: string
                         email:
                           type: string
+      
+      security: 
+        - TokenAuth: []
+        
   /api/orders/{id}:
     patch:
       summary: Assign orders to delivery crew
@@ -511,10 +527,10 @@ paths:
                       type: integer
   /auth/users/:
     post:
-      summary: Register new customers
+      summary: Register new user
       tags:
         - Authentication
-      description: Allows new customers to register by providing their username, email, and password.
+      description: Allows new users to register by providing their username, email, and password.
       requestBody:
         required: true
         content:
@@ -544,8 +560,8 @@ paths:
                     
   /auth/token/login/:
     post:
-      summary: Manager Login
-      description: Authenticate as a manager using a username and password.
+      summary: User Login
+      description: Authenticate using a username and password to obtain an auth token.
       tags:
         - Authentication
       requestBody:
@@ -557,10 +573,10 @@ paths:
               properties:
                 username:
                   type: string
-                  description: Manager's username.
+                  description: User's username.
                 password:
                   type: string
-                  description: Manager's password.
+                  description: User's password.
               required:
                 - username
                 - password
@@ -574,7 +590,24 @@ paths:
                 properties:
                   auth_token:
                     type: string
+                    description: Authentication token for accessing protected endpoints.
                     example: d4746ebb557594f21365f52f03bef2d4a5a9527d
+        401:
+          description: Unauthorized - Invalid credentials or user not verified.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  non_field_errors:
+                    type: array
+                    items:
+                      type: string
+                    description: List of authentication errors.
+                    example:
+                      - "Unable to log in with provided credentials."
+
+                    
   /api/cart/menu-items:
     post:
       summary: Add menu items to the cart
