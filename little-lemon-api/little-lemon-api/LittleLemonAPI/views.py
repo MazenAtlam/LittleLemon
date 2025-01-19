@@ -108,9 +108,12 @@ class ManagersRemoveView(generics.DestroyAPIView):
         return JsonResponse(status=200, data={"message": "User removed Managers group"})
 
 
+group_name = "Delivery crew"
+
+
 class DeliveryCrewListView(generics.ListCreateAPIView):
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
-    queryset = User.objects.filter(groups__name="Delivery crew")
+    queryset = User.objects.filter(groups__name=group_name)
     serializer_class = ManagerListSerializer
     permission_classes = [IsAuthenticated, IsManager | IsAdminUser]
 
@@ -118,7 +121,7 @@ class DeliveryCrewListView(generics.ListCreateAPIView):
         username = request.data["username"]
         if username:
             user = get_object_or_404(User, username=username)
-            crew = Group.objects.get(name="Delivery crew")
+            crew = Group.objects.get(name=group_name)
             crew.user_set.add(user)
             return JsonResponse(
                 status=201, data={"message": "User added to Delivery Crew group"}
@@ -129,12 +132,12 @@ class DeliveryCrewRemoveView(generics.DestroyAPIView):
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
     serializer_class = ManagerListSerializer
     permission_classes = [IsAuthenticated, IsManager | IsAdminUser]
-    queryset = User.objects.filter(groups__name="Delivery crew")
+    queryset = User.objects.filter(groups__name=group_name)
 
     def delete(self, request, *args, **kwargs):
         pk = self.kwargs["pk"]
         user = get_object_or_404(User, pk=pk)
-        managers = Group.objects.get(name="Delivery crew")
+        managers = Group.objects.get(name=group_name)
         managers.user_set.remove(user)
         return JsonResponse(
             status=201, data={"message": "User removed from the Delivery crew group"}
@@ -153,9 +156,9 @@ class CartOperationsView(generics.ListCreateAPIView):
     def post(self, request, *arg, **kwargs):
         serialized_item = CartAddSerializer(data=request.data)
         serialized_item.is_valid(raise_exception=True)
-        id = request.data["menuitem"]
+        menuitem_id = request.data["menuitem"]
         quantity = request.data["quantity"]
-        item = get_object_or_404(MenuItem, id=id)
+        item = get_object_or_404(MenuItem, id=menuitem_id)
         price = int(quantity) * item.price
         try:
             Cart.objects.create(
@@ -163,9 +166,9 @@ class CartOperationsView(generics.ListCreateAPIView):
                 quantity=quantity,
                 unit_price=item.price,
                 price=price,
-                menuitem_id=id,
+                menuitem_id=menuitem_id,
             )
-        except:
+        except Exception:
             return JsonResponse(status=409, data={"message": "Item already in cart"})
         return JsonResponse(status=201, data={"message": "Item added to cart!"})
 
@@ -202,7 +205,7 @@ class OrderOperationsView(generics.ListCreateAPIView):
 
     def get_permissions(self):
 
-        if self.request.method == "GET" or "POST":
+        if self.request.method in ["GET", "POST"]:
             permission_classes = [IsAuthenticated]
         else:
             permission_classes = [IsAuthenticated, IsManager | IsAdminUser]
